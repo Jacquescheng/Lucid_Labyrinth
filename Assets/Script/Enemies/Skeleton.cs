@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,17 +29,22 @@ public class Skeleton : Entity
 
        
        
-        if (!EntityManager.Instance.IsPositionBlocked(position + direction))
+        if (EntityManager.Instance.IsPositionBlocked(position + direction))
         {
             //rotate
             if (direction.x == 0)
             {
                 spriteRenderer.flipX = !spriteRenderer.flipX;
+
             }
-            this.currentDirection = new Vector2Int(-direction.x, -direction.y);
+            print(currentDirection.x);
+            print(currentDirection.y);
+            currentDirection = new Vector2Int(-direction.x, -direction.y);
+            print(currentDirection.x);
+            print(currentDirection.y);
         }
        
-        GameManager.Instance.AddAction(new MoveAction(this, direction));
+        GameManager.Instance.AddAction(new MoveAction(this, currentDirection));
     }
 
     public override void Action()

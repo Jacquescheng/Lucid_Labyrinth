@@ -42,6 +42,10 @@ public class GameManager : MonoBehaviour
                 Vector2Int test_ett_position = new Vector2Int(-1, 3);
                 EntityManager.Instance.CreateEntity(test_ett, test_ett_position);
 
+                GameObject skeleton = Resources.Load<GameObject>("Prefabs/skeleton_static");
+                Vector2Int skeleton_pos= new Vector2Int(-5, -3);
+                EntityManager.Instance.CreateEntity(skeleton, skeleton_pos);
+
                 Item item = Resources.Load<Item>("Items/New Key");
                 Vector2Int item_position = new Vector2Int(3, 3);
                 EntityManager.Instance.CreateItemEntity(item, item_position);
