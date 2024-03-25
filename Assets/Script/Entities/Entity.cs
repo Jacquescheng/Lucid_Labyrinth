@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class Entity : MonoBehaviour
 {
     public Vector2Int position;
+    public Vector2Int facingDirection;
     public bool isBlocking;
     public bool isActive;
 
@@ -64,5 +65,29 @@ public class DisableAction : IReversibleAction
     public void Undo()
     {
         entity.isActive = isActive;
+    }
+}
+
+public class ChangeFacingAction : IReversibleAction
+{
+    public Entity entity;
+    public Vector2Int oldFacingDirection;
+    public Vector2Int facingDirection;
+    
+    public ChangeFacingAction(Entity entity, Vector2Int facingDirection)
+    {
+        this.entity = entity;
+        this.oldFacingDirection = entity.facingDirection;
+        this.facingDirection = facingDirection;
+    }
+
+    public void Perform()
+    {
+        entity.facingDirection = facingDirection;
+    }
+
+    public void Undo()
+    {
+        entity.facingDirection = oldFacingDirection;
     }
 }

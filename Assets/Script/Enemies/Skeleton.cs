@@ -8,12 +8,12 @@ using UnityEngine.UIElements;
 public class Skeleton : Entity
 {
     private SpriteRenderer spriteRenderer;
-    private Vector2Int currentDirection= new Vector2Int(1, 0);
 
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        facingDirection = new Vector2Int(1, 0);
     }
 
     // Update is called once per frame
@@ -30,29 +30,22 @@ public class Skeleton : Entity
        
         if (EntityManager.Instance.IsPositionBlocked(position + direction))
         {
-            //horizontal
-            if (direction.y == 0)
-            {
-                //facing right
-                if (direction.x > 0)
-                {
-                    spriteRenderer.flipX = true;
-                }
-                //facing left
-                else
-                {
-                    spriteRenderer.flipX = false;
-                }
 
-            }
-            currentDirection = new Vector2Int(-direction.x, -direction.y);
+            GameManager.Instance.AddAction(new ChangeFacingAction(this, -direction));
         }
        
-        GameManager.Instance.AddAction(new MoveAction(this, currentDirection));
+        GameManager.Instance.AddAction(new MoveAction(this, facingDirection));
     }
 
     public override void Action()
     {
-        MoveStraight(currentDirection);
+        MoveStraight(facingDirection);
     }
+
+    public override void UpdateObject()
+    {
+        base.UpdateObject();
+        spriteRenderer.flipX = facingDirection.x == -1;
+    }
+
 }
