@@ -1,5 +1,27 @@
 {
-    "Ground":false,
-    "Wall":true,
-    "Goal":false
+    "Dungeon_Tileset_0": true,
+    "Dungeon_Tileset_1": true,
+    "Dungeon_Tileset_2": true,
+    "Dungeon_Tileset_3": true,
+    "Dungeon_Tileset_4": true,
+    "Dungeon_Tileset_5": true,
+    "Dungeon_Tileset_10": true,
+    "Dungeon_Tileset_15": true,
+    "Dungeon_Tileset_20": true,
+    "Dungeon_Tileset_25": true,
+    "Dungeon_Tileset_30": true,
+    "Dungeon_Tileset_35": true,
+    "Dungeon_Tileset_40": true,
+    "Dungeon_Tileset_41": true,
+    "Dungeon_Tileset_42": true,
+    "Dungeon_Tileset_43": true,
+    "Dungeon_Tileset_44": true,
+    "Dungeon_Tileset_45": true,
+    "Dungeon_Tileset_50": true,
+    "Dungeon_Tileset_51": true,
+    "Dungeon_Tileset_52": true,
+    "Dungeon_Tileset_53": true,
+    "Dungeon_Tileset_54": true,
+    "Dungeon_Tileset_55": true
+
  }

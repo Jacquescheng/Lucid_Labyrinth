@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: New Key
   m_EditorClassIdentifier: 
   itemName: Red Key
-  sprite: {fileID: 21300000, guid: 1f007478f7d004cfab0b1442b6900f96, type: 3}
+  sprite: {fileID: -1994422852, guid: fd1151bedb85341449b2fb4d2721670a, type: 3}
   color: {r: 1, g: 0.2783019, b: 0.2783019, a: 1}
   keyId: 0
