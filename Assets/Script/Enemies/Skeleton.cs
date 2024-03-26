@@ -21,24 +21,25 @@ public class Skeleton : Entity
      
     }
 
-    public void MoveStraight(Vector2Int direction)
+    public void MoveStraight()
     {
         Tilemap levelTilemap = GameManager.Instance.LevelTilemap;
 
        
        
-        if (EntityManager.Instance.IsPositionBlocked(position + direction))
+        if (EntityManager.Instance.IsPositionBlocked(position + facingDirection))
         {
 
-            GameManager.Instance.AddAction(new ChangeFacingAction(this, -direction));
+            GameManager.Instance.AddAction(new ChangeFacingAction(this, -facingDirection));
         }
-       
-        GameManager.Instance.AddAction(new MoveAction(this, facingDirection));
+
+        if (!EntityManager.Instance.IsPositionBlocked(position +facingDirection))
+            GameManager.Instance.AddAction(new MoveAction(this, facingDirection));
     }
 
     public override void Action()
     {
-        MoveStraight(facingDirection);
+        MoveStraight();
     }
 
 }
