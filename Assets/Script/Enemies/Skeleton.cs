@@ -12,8 +12,7 @@ public class Skeleton : Entity
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        facingDirection = new Vector2Int(1, 0);
+
     }
 
     // Update is called once per frame
@@ -40,12 +39,6 @@ public class Skeleton : Entity
     public override void Action()
     {
         MoveStraight(facingDirection);
-    }
-
-    public override void UpdateObject()
-    {
-        base.UpdateObject();
-        spriteRenderer.flipX = facingDirection.x == -1;
     }
 
 }

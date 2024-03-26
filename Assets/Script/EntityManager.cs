@@ -16,10 +16,10 @@ public class EntityManager : MonoBehaviour
 
     }
 
-    public void CreateEntity(GameObject prefab, Vector2Int position)
+    public void CreateEntity(GameObject prefab, Vector2Int position, Vector2Int faceDirection = default)
     {
         Entity entity = Instantiate(prefab, Vector3Int.zero, Quaternion.identity).GetComponent<Entity>();
-        entity.Init(position);
+        entity.Init(position, faceDirection);
         if (entity is ItemEntity) {
             ItemEntity item = (ItemEntity) entity;
             item.UpdateItemDisplay();

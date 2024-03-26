@@ -9,15 +9,17 @@ public abstract class Entity : MonoBehaviour
     public bool isActive;
 
 
-    public virtual void Init(Vector2Int position)
+    public virtual void Init(Vector2Int position, Vector2Int facingDirection = default)
     {
         this.position = position;
+        this.facingDirection = facingDirection;
         transform.position = GameManager.Instance.LevelTilemap.GetCellCenterWorld((Vector3Int)position);
     }
 
     public virtual void UpdateObject() {
         transform.position = GameManager.Instance.LevelTilemap.GetCellCenterWorld((Vector3Int)position);
         gameObject.GetComponent<SpriteRenderer>().enabled = isActive;
+        gameObject.GetComponent<SpriteRenderer>().flipX = facingDirection.x == -1;
 
     }
     public abstract void Action();
