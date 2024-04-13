@@ -6,10 +6,6 @@ using UnityEngine.Tilemaps;
 public class PlayableChar : Entity
 {
     // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
 
     public int Move(Vector2Int moveDirection)

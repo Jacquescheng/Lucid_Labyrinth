@@ -24,7 +24,7 @@ public class EntityManager : MonoBehaviour
             ItemEntity item = (ItemEntity) entity;
             item.UpdateItemDisplay();
         }
-        entities.Add(entity);
+        // entities.Add(entity);
     }
 
     public void CreateItemEntity(Item item, Vector2Int position)
@@ -34,7 +34,7 @@ public class EntityManager : MonoBehaviour
         itemEntity.Init(position);
         itemEntity.item = item;
         itemEntity.UpdateItemDisplay();
-        entities.Add(itemEntity);
+        // entities.Add(itemEntity);
     }
 
     public void EnvTurn()

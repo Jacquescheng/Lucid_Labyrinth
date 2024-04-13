@@ -7,8 +7,9 @@ public class SpikeEntity : Entity
     public bool open = false;
     private Animator animator;
     // Start is called before the first frame update
-    void Start()
+    public new void Start()
     {
+        base.Start();
         animator = GetComponent<Animator>();
         if (open) {
             animator.Play("spike_open_idle");
@@ -16,12 +17,6 @@ public class SpikeEntity : Entity
             animator.Play("spike_close_idle");
         }
         animator.SetBool("open", open);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public override void Action()

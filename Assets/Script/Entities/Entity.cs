@@ -23,6 +23,13 @@ public abstract class Entity : MonoBehaviour
 
     }
     public abstract void Action();
+
+    public void Start() {
+
+        EntityManager.Instance.entities.Add(this);
+        UpdateObject();
+        
+    }
     
 }
 
