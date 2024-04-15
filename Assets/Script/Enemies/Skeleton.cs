@@ -25,11 +25,10 @@ public class Skeleton : Entity
     public void MoveStraight(Vector2Int direction)
     {
         Tilemap levelTilemap = GameManager.Instance.LevelTilemap;
-
-       
        
         if (EntityManager.Instance.IsPositionBlocked(position + direction))
         {
+<<<<<<< Updated upstream
             //horizontal
             if (direction.y == 0)
             {
@@ -46,6 +45,9 @@ public class Skeleton : Entity
 
             }
             currentDirection = new Vector2Int(-direction.x, -direction.y);
+=======
+            GameManager.Instance.AddAction(new ChangeFacingAction(this, -facingDirection));
+>>>>>>> Stashed changes
         }
        
         GameManager.Instance.AddAction(new MoveAction(this, currentDirection));

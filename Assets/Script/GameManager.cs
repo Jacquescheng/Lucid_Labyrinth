@@ -42,9 +42,13 @@ public class GameManager : MonoBehaviour
                 Vector2Int test_ett_position = new Vector2Int(-1, 3);
                 EntityManager.Instance.CreateEntity(test_ett, test_ett_position);
 
-                GameObject skeleton = Resources.Load<GameObject>("Prefabs/skeleton_static");
+                GameObject skeleton = Resources.Load<GameObject>("Prefabs/skeleton");
                 Vector2Int skeleton_pos= new Vector2Int(-5, -3);
                 EntityManager.Instance.CreateEntity(skeleton, skeleton_pos);
+
+                GameObject vampire = Resources.Load<GameObject>("Prefabs/vampire");
+                Vector2Int vampire_pos = new Vector2Int(3, -2);
+                EntityManager.Instance.CreateEntity(vampire, vampire_pos, new Vector2Int(1, 0));
 
                 Item item = Resources.Load<Item>("Items/New Key");
                 Vector2Int item_position = new Vector2Int(3, 3);
