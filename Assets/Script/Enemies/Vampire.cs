@@ -7,11 +7,7 @@ using UnityEngine.UIElements;
 
 public class Vampire : Entity
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  
 
     // Update is called once per frame
     void Update()
@@ -64,7 +60,6 @@ public class Vampire : Entity
         if (!EntityManager.Instance.IsPositionBlocked(position + moveDirection))
         {
             GameManager.Instance.AddAction(new MoveAction(this, moveDirection));
-            Debug.Log(moveDirection);
         }
         else
         {

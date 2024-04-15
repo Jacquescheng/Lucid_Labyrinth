@@ -7,13 +7,21 @@ using UnityEngine.UIElements;
 
 public class Skeleton : Entity
 {
-    private SpriteRenderer spriteRenderer;
+    new void Start()
+    {
+        base.Start();
+        facingDirection = new Vector2Int(1, 0);
+    }
+    // Update is called once per frame
+    void Update()
+    {
 
+    }
 
     public void MoveStraight()
     {
         Tilemap levelTilemap = GameManager.Instance.LevelTilemap;
-       
+        Debug.Log(facingDirection);
         if (EntityManager.Instance.IsPositionBlocked(position + facingDirection))
         {
 
