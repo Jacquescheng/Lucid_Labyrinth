@@ -21,7 +21,6 @@ public class Skeleton : Entity
     public void MoveStraight()
     {
         Tilemap levelTilemap = GameManager.Instance.LevelTilemap;
-        Debug.Log(facingDirection);
         if (EntityManager.Instance.IsPositionBlocked(position + facingDirection))
         {
 
