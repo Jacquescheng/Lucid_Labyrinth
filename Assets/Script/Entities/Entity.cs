@@ -4,22 +4,32 @@ using UnityEngine;
 public abstract class Entity : MonoBehaviour
 {
     public Vector2Int position;
+    public Vector2Int facingDirection;
     public bool isBlocking;
     public bool isActive;
 
 
-    public virtual void Init(Vector2Int position)
+    public virtual void Init(Vector2Int position, Vector2Int facingDirection = default)
     {
         this.position = position;
+        this.facingDirection = facingDirection;
         transform.position = GameManager.Instance.LevelTilemap.GetCellCenterWorld((Vector3Int)position);
     }
 
     public virtual void UpdateObject() {
         transform.position = GameManager.Instance.LevelTilemap.GetCellCenterWorld((Vector3Int)position);
         gameObject.GetComponent<SpriteRenderer>().enabled = isActive;
+        gameObject.GetComponent<SpriteRenderer>().flipX = facingDirection.x == -1;
 
     }
     public abstract void Action();
+
+    public void Start() {
+
+        EntityManager.Instance.entities.Add(this);
+        UpdateObject();
+        
+    }
     
 }
 
@@ -64,5 +74,29 @@ public class DisableAction : IReversibleAction
     public void Undo()
     {
         entity.isActive = isActive;
+    }
+}
+
+public class ChangeFacingAction : IReversibleAction
+{
+    public Entity entity;
+    public Vector2Int oldFacingDirection;
+    public Vector2Int facingDirection;
+    
+    public ChangeFacingAction(Entity entity, Vector2Int facingDirection)
+    {
+        this.entity = entity;
+        this.oldFacingDirection = entity.facingDirection;
+        this.facingDirection = facingDirection;
+    }
+
+    public void Perform()
+    {
+        entity.facingDirection = facingDirection;
+    }
+
+    public void Undo()
+    {
+        entity.facingDirection = oldFacingDirection;
     }
 }

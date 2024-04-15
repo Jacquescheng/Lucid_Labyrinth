@@ -38,9 +38,9 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.SpawnObject:
-                GameObject test_ett = Resources.Load<GameObject>("Prefabs/RandomMovingEtt");
-                Vector2Int test_ett_position = new Vector2Int(-1, 3);
-                EntityManager.Instance.CreateEntity(test_ett, test_ett_position);
+                // GameObject test_ett = Resources.Load<GameObject>("Prefabs/RandomMovingEtt");
+                // Vector2Int test_ett_position = new Vector2Int(-1, 3);
+                // EntityManager.Instance.CreateEntity(test_ett, test_ett_position);
 
                 GameObject skeleton = Resources.Load<GameObject>("Prefabs/skeleton");
                 Vector2Int skeleton_pos= new Vector2Int(-5, -3);
@@ -50,10 +50,23 @@ public class GameManager : MonoBehaviour
                 Vector2Int vampire_pos = new Vector2Int(3, -2);
                 EntityManager.Instance.CreateEntity(vampire, vampire_pos, new Vector2Int(1, 0));
 
-                Item item = Resources.Load<Item>("Items/New Key");
-                Vector2Int item_position = new Vector2Int(3, 3);
-                EntityManager.Instance.CreateItemEntity(item, item_position);
+                // Item item = Resources.Load<Item>("Items/New Key");
+                // Vector2Int item_position = new Vector2Int(3, 3);
+                // EntityManager.Instance.CreateItemEntity(item, item_position);
+
+                // GameObject spike = Resources.Load<GameObject>("Prefabs/SpikeEntity");
+                // spike.GetComponent<SpikeEntity>().open = true;
+                // Vector2Int spike_position = new Vector2Int(0, 0);
+                // EntityManager.Instance.CreateEntity(spike, spike_position);
+
+                // GameObject spike_2 = Resources.Load<GameObject>("Prefabs/SpikeEntity");
+                // spike_2.GetComponent<SpikeEntity>().open = false;
+                // Vector2Int spike_position_2 = new Vector2Int(0, -1);
+                // EntityManager.Instance.CreateEntity(spike_2, spike_position_2);
+
                 ChangeGameState(GameState.SpawnPlayer);
+
+
                 break;
             case GameState.SpawnPlayer:
                 GameObject player = Resources.Load<GameObject>("Prefabs/PlayableChar");

@@ -55,7 +55,7 @@ public class InputManager : MonoBehaviour
                 {
                     PlayableChar player = (PlayableChar) player_ent;
                     player.Move(moveDirection);
-                    player.Eat();
+                    // player.Eat();
                 }
 
                 GameManager.Instance.ChangeGameState(GameState.EnvTurn);

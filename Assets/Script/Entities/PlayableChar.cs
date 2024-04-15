@@ -6,10 +6,6 @@ using UnityEngine.Tilemaps;
 public class PlayableChar : Entity
 {
     // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
 
     public int Move(Vector2Int moveDirection)
@@ -29,16 +25,16 @@ public class PlayableChar : Entity
 
     }
 
-    public void Eat() { // For testing only
-        foreach (var entity in EntityManager.Instance.entities)
-        {
-            if (entity != this && entity.position == position && entity.isActive)
-            {
-                Debug.Log("Eating " + entity.name);
-                GameManager.Instance.AddAction(new DisableAction(entity));
-            }
-        }
-    }
+    // public void Eat() { // For testing only
+    //     foreach (var entity in EntityManager.Instance.entities)
+    //     {
+    //         if (entity != this && entity.position == position && entity.isActive)
+    //         {
+    //             Debug.Log("Eating " + entity.name);
+    //             GameManager.Instance.AddAction(new DisableAction(entity));
+    //         }
+    //     }
+    // }
 
     public override void Action()
     {

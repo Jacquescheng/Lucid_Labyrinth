@@ -16,15 +16,15 @@ public class EntityManager : MonoBehaviour
 
     }
 
-    public void CreateEntity(GameObject prefab, Vector2Int position)
+    public void CreateEntity(GameObject prefab, Vector2Int position, Vector2Int faceDirection = default)
     {
         Entity entity = Instantiate(prefab, Vector3Int.zero, Quaternion.identity).GetComponent<Entity>();
-        entity.Init(position);
+        entity.Init(position, faceDirection);
         if (entity is ItemEntity) {
             ItemEntity item = (ItemEntity) entity;
             item.UpdateItemDisplay();
         }
-        entities.Add(entity);
+        // entities.Add(entity);
     }
 
     public void CreateItemEntity(Item item, Vector2Int position)
@@ -34,7 +34,7 @@ public class EntityManager : MonoBehaviour
         itemEntity.Init(position);
         itemEntity.item = item;
         itemEntity.UpdateItemDisplay();
-        entities.Add(itemEntity);
+        // entities.Add(itemEntity);
     }
 
     public void EnvTurn()

@@ -14,4 +14,10 @@ public class ItemEntity : Entity
     {
 
     }
+
+    public new void Start()
+    {
+        base.Start();
+        UpdateItemDisplay();
+    }
 }
