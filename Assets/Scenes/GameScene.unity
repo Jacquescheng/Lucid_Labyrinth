@@ -60921,17 +60921,25 @@ PrefabInstance:
       propertyPath: isBlocking
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8151466397052378698, guid: d78b9317b3ef6294f8d1466f7e07a207, type: 3}
+      propertyPath: position.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -8151466397052378698, guid: d78b9317b3ef6294f8d1466f7e07a207, type: 3}
+      propertyPath: position.y
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 3816046220763525325, guid: d78b9317b3ef6294f8d1466f7e07a207, type: 3}
       propertyPath: m_Name
       value: skull
       objectReference: {fileID: 0}
     - target: {fileID: 7276663710430271499, guid: d78b9317b3ef6294f8d1466f7e07a207, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.544333
+      value: 15.46
       objectReference: {fileID: 0}
     - target: {fileID: 7276663710430271499, guid: d78b9317b3ef6294f8d1466f7e07a207, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.43459105
+      value: -0.39
       objectReference: {fileID: 0}
     - target: {fileID: 7276663710430271499, guid: d78b9317b3ef6294f8d1466f7e07a207, type: 3}
       propertyPath: m_LocalPosition.z
@@ -61506,6 +61514,14 @@ PrefabInstance:
     - target: {fileID: 6127711458154902741, guid: bd5571314480a624b9f58997ab98ba2d, type: 3}
       propertyPath: m_Name
       value: skeleton_static
+      objectReference: {fileID: 0}
+    - target: {fileID: 8345958919908875677, guid: bd5571314480a624b9f58997ab98ba2d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 8345958919908875677, guid: bd5571314480a624b9f58997ab98ba2d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.41
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

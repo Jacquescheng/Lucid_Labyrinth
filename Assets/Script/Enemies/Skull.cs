@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Skull : Enemy
 {
-    int curDir = 4;
-    int clockwise = 1;
-    bool lastTurnStop = false;
+    public int curDir = 4;
+    public int clockwise = 1;
+    public bool lastTurnStop = false;
     private Vector2Int[] directions = new Vector2Int[]
     {
         new Vector2Int(0, -1),
@@ -21,6 +21,10 @@ public class Skull : Enemy
 
     public void MoveCircle()
     {
+
+        int curDir = this.curDir;
+        int clockwise = this.clockwise;
+        bool lastTurnStop = this.lastTurnStop;
         //check continue clockwise
         if (EntityManager.Instance.IsPositionBlocked(position + clockwise * directions[curDir % 4]))
         {
@@ -70,10 +74,45 @@ public class Skull : Enemy
         {
             curDir += 4;
         }
+        GameManager.Instance.AddAction(new SkullUpdateAction(this, curDir, clockwise, lastTurnStop));
 
     }
     public override void Action()
     {
         MoveCircle();
+    }
+}
+
+public class SkullUpdateAction : IReversibleAction
+{
+    public Skull skull;
+    public int curDirBefore;
+    public int curDirAfter;
+    public int clockwiseBefore;
+    public int clockwiseAfter;
+    public bool lastTurnStopBefore;
+    public bool lastTurnStopAfter;
+    public SkullUpdateAction(Skull skull, int curDir, int clockwise, bool lastTurnStop)
+    {
+        this.skull = skull;
+        this.curDirBefore = skull.curDir;
+        this.curDirAfter = curDir;
+        this.clockwiseBefore = skull.clockwise;
+        this.clockwiseAfter = clockwise;
+        this.lastTurnStopBefore = skull.lastTurnStop;
+        this.lastTurnStopAfter = lastTurnStop;
+    }
+
+    public void Perform()
+    {
+        skull.curDir = curDirAfter;
+        skull.clockwise = clockwiseAfter;
+        skull.lastTurnStop = lastTurnStopAfter;
+    }
+    public void Undo()
+    {
+        skull.curDir = curDirBefore;
+        skull.clockwise = clockwiseBefore;
+        skull.lastTurnStop = lastTurnStopBefore;
     }
 }
