@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     public void ChangeGameState(GameState gameState)
     {
         GameState = gameState;
-        Debug.Log("Game State: " + gameState);
+        // Debug.Log("Game State: " + gameState);
         switch (gameState)
         {
             case GameState.SpawnObject:

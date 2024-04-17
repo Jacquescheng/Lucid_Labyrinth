@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
-public class Vampire : Entity
+public class Vampire : Enemy
 {
   
 

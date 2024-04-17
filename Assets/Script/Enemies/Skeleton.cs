@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
-public class Skeleton : Entity
+public class Skeleton : Enemy
 {
     new void Start()
     {

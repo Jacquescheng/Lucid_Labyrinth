@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpikeEntity : Entity
+public class SpikeEntity : Gimmic
 {
     public bool open = false;
     private Animator animator;

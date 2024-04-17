@@ -39,12 +39,28 @@ public class EntityManager : MonoBehaviour
 
     public void EnvTurn()
     {
+        List<PlayableChar> players = new List<PlayableChar>();
         foreach (var entity in entities)
         {
             if (entity.isActive)
-                entity.Action();
+                if (entity is PlayableChar @char)
+                {
+                    players.Add(@char);
+                }
+                else
+                {
+                    entity.Action();
+                }
+        }
+        foreach (var player in players)
+        {
+            player.Action();
+        }
+        foreach (var entity in entities)
+        {
             entity.UpdateObject();
         }
+
 
         GameManager.Instance.ChangeGameState(GameState.EndTurn);
     }

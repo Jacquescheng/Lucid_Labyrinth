@@ -1,7 +1,7 @@
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class Skull : Entity
+public class Skull : Enemy
 {
     int curDir = 4;
     int clockwise = 1;
