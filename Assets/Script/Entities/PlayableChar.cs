@@ -21,10 +21,14 @@ public class PlayableChar : Entity
         {
             this.facingDirection = moveDirection;
             GameManager.Instance.AddAction(new MoveAction(this, moveDirection));
-            return 1;
+            return 0;
         }
 
-        return 0;
+        var entity = EntityManager.Instance.CheckEntityinPos(targetCell);
+        if (entity is Enemy)
+            return 2;
+
+        return 1;
 
     }
 

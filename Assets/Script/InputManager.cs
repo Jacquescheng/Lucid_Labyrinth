@@ -6,6 +6,7 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance;
+    public List<Tuple<PlayableChar, Vector2Int>> bufferedMoves = new List<Tuple<PlayableChar, Vector2Int>>();
     void Awake()
     {
         Instance = this;
@@ -54,10 +55,13 @@ public class InputManager : MonoBehaviour
                 foreach (var player_ent in players)
                 {
                     PlayableChar player = (PlayableChar) player_ent;
-                    player.Move(moveDirection);
-                    //if (player.Move(moveDirection) == 0) {
-                    //   return;
-                    //}
+                    int res = player.Move(moveDirection);
+                    if (res == 1) {
+                        return;
+                    }
+                    if (res == 2) {
+                        bufferedMoves.Add(new Tuple<PlayableChar, Vector2Int>(player, moveDirection));
+                    }
                     // player.Eat();
                 }
 

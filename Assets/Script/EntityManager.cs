@@ -56,6 +56,19 @@ public class EntityManager : MonoBehaviour
         {
             player.Action();
         }
+        if (InputManager.Instance.bufferedMoves.Count > 0)
+        {
+            foreach (var move in InputManager.Instance.bufferedMoves)
+            {
+                PlayableChar player = move.Item1;
+                Vector2Int moveDirection = move.Item2;
+                if (player.isActive) {
+                    player.Move(moveDirection);
+                    player.Action();
+                }
+            }
+            InputManager.Instance.bufferedMoves.Clear();
+        }
         foreach (var entity in entities)
         {
             entity.UpdateObject();
@@ -87,14 +100,27 @@ public class EntityManager : MonoBehaviour
                 return true;
             }
         }
-        foreach (var entity in entities)
+        Entity entity = CheckEntityinPos(position);
+        if (entity != null)
         {
-            if ((entity.position == position) && entity.isBlocking && entity.isActive)
+            if (entity.isActive && entity.isBlocking)
             {
                 return true;
             }
         }
         return false;
+    }
+
+    public Entity CheckEntityinPos(Vector2Int position)
+    {
+        foreach (var entity in entities)
+        {
+            if (entity.position == position && entity.isActive)
+            {
+                return entity;
+            }
+        }
+        return null;
     }
 
     
