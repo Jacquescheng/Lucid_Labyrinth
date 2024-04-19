@@ -8,6 +8,9 @@ using Newtonsoft.Json;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public static bool isPaused = false;
+    public static bool isDead = false;
+    public static string killedBy;
     public GameState state;
 
     public Tilemap LevelTilemap;
@@ -27,8 +30,10 @@ public class GameManager : MonoBehaviour
     {
         BlockingTiles = JsonConvert.DeserializeObject<Dictionary<string, bool>>(BlockingTilesJson.text);
 
-        ChangeGameState(0);
         InputManager.Instance.enabled = true;
+        isDead = false;
+        isPaused = false;
+        ChangeGameState(0);
     }
 
     public void ChangeGameState(GameState gameState)
@@ -82,6 +87,9 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.EndTurn:
                 actionStack.Push(currentTurnActions);
+                if (isDead) {
+                    gameObject.GetComponent<DeadScreen>().Create();
+                }
                 ChangeGameState(GameState.PlayerTurn);
                 break;
             default:

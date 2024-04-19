@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpikeEntity : Gimmic
 {
     public bool open = false;
+    public readonly string Label = "Spike";
     private Animator animator;
     // Start is called before the first frame update
     public new void Start()

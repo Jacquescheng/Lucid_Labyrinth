@@ -50,7 +50,9 @@ public class PlayableChar : Entity
 
     public void EnemyIteraction(Enemy enemy) {
         GameManager.Instance.AddAction(new DisableAction(this));
-        Debug.Log($"You are killed by {enemy.Label} !");
+        GameManager.isDead = true;
+        GameManager.killedBy = enemy.Label;
+        Debug.Log($"You are killed by {enemy.Label}!");
     }
 
     public void GimmicIteraction(Gimmic gimmic) {
@@ -59,7 +61,9 @@ public class PlayableChar : Entity
             if (spikeEntity.open)
             {
                 GameManager.Instance.AddAction(new DisableAction(this));
-                Debug.Log("You died!");
+                GameManager.isDead = true;
+                GameManager.killedBy = spikeEntity.Label;
+                Debug.Log($"You are killed by {spikeEntity.Label}!");
             }
         }
     }
