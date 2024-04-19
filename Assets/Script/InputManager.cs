@@ -13,7 +13,7 @@ public class InputManager : MonoBehaviour
     }
     public void Update()
     {
-        if (GameManager.Instance.state == GameState.PlayerTurn)
+        if (GameManager.Instance.state == GameState.PlayerTurn && !PauseMenu.isPaused)
         {
             bool didPlayerAct = false;
             Vector2Int moveDirection = new Vector2Int(0, 0);
