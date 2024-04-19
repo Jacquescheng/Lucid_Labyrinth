@@ -54,9 +54,10 @@ public class InputManager : MonoBehaviour
                 foreach (var player_ent in players)
                 {
                     PlayableChar player = (PlayableChar) player_ent;
-                    if (player.Move(moveDirection) == 0) {
-                        return;
-                    }
+                    player.Move(moveDirection);
+                    //if (player.Move(moveDirection) == 0) {
+                    //   return;
+                    //}
                     // player.Eat();
                 }
 
