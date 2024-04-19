@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public GameState GameState;
+    public GameState state;
 
     public Tilemap LevelTilemap;
     
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     public void ChangeGameState(GameState gameState)
     {
-        GameState = gameState;
+        state = gameState;
         // Debug.Log("Game State: " + gameState);
         switch (gameState)
         {

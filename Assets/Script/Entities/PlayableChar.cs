@@ -19,6 +19,7 @@ public class PlayableChar : Entity
 
         if (!EntityManager.Instance.IsPositionBlocked(targetCell))
         {
+            this.facingDirection = moveDirection;
             GameManager.Instance.AddAction(new MoveAction(this, moveDirection));
             return 1;
         }
@@ -49,7 +50,7 @@ public class PlayableChar : Entity
 
     public void EnemyIteraction(Enemy enemy) {
         GameManager.Instance.AddAction(new DisableAction(this));
-        Debug.Log("You died!");
+        Debug.Log($"You are killed by {enemy.Label} !");
     }
 
     public void GimmicIteraction(Gimmic gimmic) {

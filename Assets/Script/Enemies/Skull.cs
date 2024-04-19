@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Skull : Enemy
 {
+    public override string Label => "Skull";
     public int curDir = 4;
     public int clockwise = 1;
     public bool lastTurnStop = false;

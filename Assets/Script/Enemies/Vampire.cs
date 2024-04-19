@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class Vampire : Enemy
 {
-  
+    public override string Label => "Vampire";
 
     // Update is called once per frame
     void Update()

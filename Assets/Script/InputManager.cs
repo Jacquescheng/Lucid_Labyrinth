@@ -13,7 +13,7 @@ public class InputManager : MonoBehaviour
     }
     public void Update()
     {
-        if (GameManager.Instance.GameState == GameState.PlayerTurn)
+        if (GameManager.Instance.state == GameState.PlayerTurn)
         {
             bool didPlayerAct = false;
             Vector2Int moveDirection = new Vector2Int(0, 0);
@@ -54,7 +54,9 @@ public class InputManager : MonoBehaviour
                 foreach (var player_ent in players)
                 {
                     PlayableChar player = (PlayableChar) player_ent;
-                    player.Move(moveDirection);
+                    if (player.Move(moveDirection) == 0) {
+                        return;
+                    }
                     // player.Eat();
                 }
 
