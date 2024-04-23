@@ -8,6 +8,22 @@ using UnityEngine.UIElements;
 public class Vampire : Enemy
 {
     public override string Label => "Vampire";
+    public Vector2Int petrolPoint;
+    public bool SpawnIsPetrolPoint = true;
+    int chaseRange = 5;
+    int retreatRange = 7;
+
+    // [NonSerialized]
+    public int actionMode = 0;
+
+    new void Start()
+    {
+        base.Start();
+        if (SpawnIsPetrolPoint)
+        {
+            petrolPoint = position;
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -15,26 +31,25 @@ public class Vampire : Enemy
         
     }
 
-    public void MoveToPlayer()
+    public void MoveToPosition(Vector2Int targetPosition)
     {
-        Entity player = EntityManager.Instance.entities.Find(entity => entity is PlayableChar);
         Vector2Int moveDirection = new Vector2Int(0, 0);
-        Vector2Int playerDirection = player.position - position;
+        Vector2Int targetDirection = targetPosition - position;
         bool toX;
-        int xsign= playerDirection.x > 0 ? 1 : (playerDirection.x < 0 ? -1 : 0);
-        int ysign = playerDirection.y > 0 ? 1 : (playerDirection.y < 0 ? -1 : 0);
+        int xsign= targetDirection.x > 0 ? 1 : (targetDirection.x < 0 ? -1 : 0);
+        int ysign = targetDirection.y > 0 ? 1 : (targetDirection.y < 0 ? -1 : 0);
         
         //change direction if player on leftside of player
-        if (playerDirection.x<0)
+        if (targetDirection.x<0)
         {
             GameManager.Instance.AddAction(new ChangeFacingAction(this, -facingDirection));
         }
         //select furthest x/y direction to move first
-        if (Math.Abs(playerDirection.x) > Math.Abs(playerDirection.y))
+        if (Math.Abs(targetDirection.x) > Math.Abs(targetDirection.y))
         {
 
             //move x
-            if(player.position.x < position.x)
+            if(targetPosition.x < position.x)
             {
                 moveDirection.x = -1;
             }
@@ -47,7 +62,7 @@ public class Vampire : Enemy
         else
         {
             //move y
-            if (player.position.y < position.y)
+            if (targetPosition.y < position.y)
             {
                 moveDirection.y = -1;
             }
@@ -67,7 +82,7 @@ public class Vampire : Enemy
             if(toX)
             {
                 //move y
-                if (player.position.y < position.y)
+                if (targetPosition.y < position.y)
                 {
                     moveDirection.y = -1;
                 }
@@ -78,7 +93,7 @@ public class Vampire : Enemy
             }
             else
             {
-                if (player.position.x < position.x)
+                if (targetPosition.x < position.x)
                 {
                     moveDirection.x = -1;
                 }
@@ -97,6 +112,47 @@ public class Vampire : Enemy
     }
     public override void Action()
     {
-        MoveToPlayer();
+        Entity player = EntityManager.Instance.entities.Find(entity => entity is PlayableChar);
+        Vector2Int playerPosition = player.position;
+        if (Vector2Int.Distance(playerPosition, petrolPoint) <= chaseRange)
+        {
+            GameManager.Instance.AddAction(new ChangeChasingAction(this, 1));
+        }
+        else if (Vector2Int.Distance(playerPosition, petrolPoint) >= retreatRange)
+        {
+            GameManager.Instance.AddAction(new ChangeChasingAction(this, 0));
+        }
+
+        if (actionMode == 0)
+        {
+            MoveToPosition(petrolPoint);
+        }
+        else if (actionMode == 1)
+        {
+            MoveToPosition(playerPosition);
+        }
+    }
+}
+
+public class ChangeChasingAction : IReversibleAction
+{
+    public Vampire vampire;
+    public int actionModeBefore;
+    public int actionModeAfter;
+    public ChangeChasingAction(Vampire vampire, int actionMode)
+    {
+        this.vampire = vampire;
+        this.actionModeBefore = vampire.actionMode;
+        this.actionModeAfter = actionMode;
+    }
+
+    public void Perform()
+    {
+        vampire.actionMode = actionModeAfter;
+    }
+
+    public void Undo()
+    {
+        vampire.actionMode = actionModeBefore;
     }
 }
