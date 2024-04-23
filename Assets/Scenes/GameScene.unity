@@ -63654,7 +63654,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &668850165
 Transform:
   m_ObjectHideFlags: 0
@@ -67799,6 +67799,10 @@ PrefabInstance:
     - target: {fileID: 879928294753455637, guid: 8fe826ae351a6462683e25cf48d0cb2b, type: 3}
       propertyPath: m_Name
       value: SpikeEntity
+      objectReference: {fileID: 0}
+    - target: {fileID: 879928294753455637, guid: 8fe826ae351a6462683e25cf48d0cb2b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2071024125438880632, guid: 8fe826ae351a6462683e25cf48d0cb2b, type: 3}
       propertyPath: position.x
