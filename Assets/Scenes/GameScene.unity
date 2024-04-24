@@ -66513,7 +66513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8110948806820151978, guid: 6ddf892afcb3c2044821e915cedbbbdf, type: 3}
       propertyPath: retreatRange
-      value: 15
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -69215,7 +69215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8110948806820151978, guid: 6ddf892afcb3c2044821e915cedbbbdf, type: 3}
       propertyPath: retreatRange
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
