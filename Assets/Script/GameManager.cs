@@ -10,8 +10,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public static bool isPaused = false;
     public static bool isDead = false;
-    public static bool won = false;
     public static string killedBy;
+    public static int deathCount = 0;
+    public static bool won = false;
     public GameState state;
 
     public Tilemap LevelTilemap;
@@ -33,7 +34,9 @@ public class GameManager : MonoBehaviour
 
         InputManager.Instance.enabled = true;
         isDead = false;
+        deathCount = 0;
         isPaused = false;
+        won = false;
         ChangeGameState(0);
     }
 
@@ -106,6 +109,7 @@ public class GameManager : MonoBehaviour
 
                 actionStack.Push(currentTurnActions);
                 if (isDead) {
+                    deathCount++;
                     gameObject.GetComponent<DeadScreen>().Create();
                 } else if (won) {
                     gameObject.GetComponent<EndScreen>().Create();
