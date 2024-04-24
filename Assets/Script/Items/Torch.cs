@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -8,31 +9,44 @@ public class Torch : Item
 
     public override void GetItem(PlayableChar player)
     {
-        Light2D light2D = player.gameObject.transform.GetComponentInChildren<Light2D>();
-        GameManager.Instance.AddAction(new AddLightRadiusAction(light2D, addRadius));
+        GameManager.Instance.AddAction(new AddLightRadiusAction(player, addRadius));
     }
 }
 
 class AddLightRadiusAction : IReversibleAction
 {
     public Light2D light2D;
-    public float radiusBefore;
-    public float radiusAfter;
+    public CinemachineVirtualCamera virtualCamera;
+    public float outerRadiusBefore;
+    public float outerRadiusAfter;
+    public float innerRadiusBefore;
+    public float innerRadiusAfter;
+    public float orthoBefore;
+    public float orthoAfter;
 
-    public AddLightRadiusAction(Light2D light2D, float radius)
+    public AddLightRadiusAction(PlayableChar player, float radius)
     {
-        this.light2D = light2D;
-        this.radiusBefore = light2D.pointLightOuterRadius;
-        this.radiusAfter = radiusBefore + radius;
+        this.light2D = player.gameObject.transform.GetComponentInChildren<Light2D>();
+        this.virtualCamera = player.gameObject.transform.GetComponentInChildren<CinemachineVirtualCamera>();
+        this.outerRadiusBefore = light2D.pointLightOuterRadius;
+        this.outerRadiusAfter = light2D.pointLightOuterRadius + radius;
+        this.innerRadiusBefore = light2D.pointLightInnerRadius;
+        this.innerRadiusAfter = light2D.pointLightInnerRadius + radius/2; 
+        this.orthoBefore = virtualCamera.m_Lens.OrthographicSize;
+        this.orthoAfter = virtualCamera.m_Lens.OrthographicSize + radius/2;
     }
 
     public void Perform()
     {
-        light2D.pointLightOuterRadius = radiusAfter;
+        light2D.pointLightOuterRadius = outerRadiusAfter;
+        light2D.pointLightInnerRadius = innerRadiusAfter;
+        virtualCamera.m_Lens.OrthographicSize = orthoAfter;
     }
 
     public void Undo()
     {
-        light2D.pointLightOuterRadius = radiusBefore;
+        light2D.pointLightOuterRadius = outerRadiusBefore;
+        light2D.pointLightInnerRadius = innerRadiusBefore;
+        virtualCamera.m_Lens.OrthographicSize = orthoBefore;
     }
 }
