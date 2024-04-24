@@ -39,6 +39,8 @@ public class DeadScreen : MonoBehaviour
         deadScreen.SetActive(false);
         GameManager.Instance.Undo();
         GameManager.isPaused = false;
+        audioSources[0].Stop();
+        audioSources[2].Play();
     }
 
     public void Restart()

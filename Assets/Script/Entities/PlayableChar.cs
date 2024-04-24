@@ -11,6 +11,8 @@ public class PlayableChar : Entity
     public int keys = 0;
     public int invincibleCounter = 0;
     private AudioSource[] audioSources;
+
+    private AudioSource[] allAudioSources;
     public int Move(Vector2Int moveDirection)
     {
         // Move the character
@@ -60,7 +62,7 @@ public class PlayableChar : Entity
         Debug.Log($"You are killed by {enemy.Label}!");
     }
 
-    public void GimmicIteraction(Gimmic gimmic,  AudioSource background,  AudioSource death) {
+    public void GimmicIteraction(Gimmic gimmic, AudioSource death) {
         if (gimmic is SpikeEntity spikeEntity)
         {
             if (spikeEntity.open && invincibleCounter == 0)
@@ -69,7 +71,10 @@ public class PlayableChar : Entity
                 GameManager.isDead = true;
                 GameManager.killedBy = spikeEntity.Label;
                 Debug.Log($"You are killed by {spikeEntity.Label}!");
-                background.Stop();
+                allAudioSources = GameObject.FindObjectsOfType<AudioSource>();
+                foreach (AudioSource audio in allAudioSources){
+                    audio.Stop();
+                }
                 death.Play();
             }
         }
@@ -114,11 +119,15 @@ public class PlayableChar : Entity
                 else if (entity is Enemy enemy)
                 {
                     EnemyIteraction(enemy);
-                    audioSources[2].Stop();
+                    allAudioSources = GameObject.FindObjectsOfType<AudioSource>();
+                    foreach (AudioSource audio in allAudioSources){
+                        audio.Stop();
+                    }
                     audioSources[1].Play();
-                } else if (entity is Gimmic gimmic) 
+                } 
+                else if (entity is Gimmic gimmic) 
                 {
-                    GimmicIteraction(gimmic, audioSources[2], audioSources[1]);
+                    GimmicIteraction(gimmic, audioSources[1]);
                 }
             }
             if (entity != this && Vector2.Distance(entity.position, position) < 2 && entity.isActive)
