@@ -31,5 +31,6 @@ public class InstructionPage : MonoBehaviour
     {
         instructionPage.SetActive(false);
         GameManager.isPaused = false;
+        gameObject.GetComponent<OverlayUI>().Create();
     }
 }

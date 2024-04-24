@@ -86,6 +86,8 @@ public class GameManager : MonoBehaviour
                 if (showInstruction) {
                     gameObject.GetComponent<InstructionPage>().Create();
                     showInstruction = false;
+                } else {
+                    gameObject.GetComponent<OverlayUI>().Create();
                 }
 
                 ChangeGameState(GameState.PlayerTurn);
