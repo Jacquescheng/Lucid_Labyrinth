@@ -10,11 +10,12 @@ public class Vampire : Enemy
     public override string Label => "Vampire";
     public Vector2Int petrolPoint;
     public bool SpawnIsPetrolPoint = true;
-    public int chaseRange = 5;
+    public int chaseRange = 10;
     public int retreatRange = 10;
 
     // [NonSerialized]
     public int actionMode = 0;
+    private Vector2Int nextPos;
 
     new void Start()
     {
@@ -78,6 +79,7 @@ public class Vampire : Enemy
         }
         if (!EntityManager.Instance.IsPositionBlocked(position + moveDirection))
         {
+            nextPos = position + moveDirection;
             GameManager.Instance.AddAction(new MoveAction(this, moveDirection));
         }
         else
@@ -95,14 +97,31 @@ public class Vampire : Enemy
             }
             if (!EntityManager.Instance.IsPositionBlocked(position + moveDirection))
             {
+                nextPos = position + moveDirection;
                 GameManager.Instance.AddAction(new MoveAction(this, moveDirection));
                 // Debug.Log(moveDirection);
             }
         }
             
     }
+
+    private void GimmicIteraction(Gimmic gimmic)
+    {
+        if(gimmic is SpikeEntity a)
+        {
+            Debug.Log(a.open);
+        }
+        
+        if (gimmic is SpikeEntity spikeEntity && spikeEntity.open)
+        {
+                GameManager.Instance.AddAction(new DisableAction(this));
+            
+        }
+    }
     public override void Action()
     {
+        
+
         Entity player = EntityManager.Instance.entities.Find(entity => entity is PlayableChar);
         Vector2Int playerPosition = player.position;
         if (Vector2Int.Distance(playerPosition, petrolPoint) <= chaseRange)
@@ -122,6 +141,16 @@ public class Vampire : Enemy
         {
             MoveToPosition(playerPosition);
         }
+        foreach (var entity in EntityManager.Instance.entities)
+        {
+
+            if (entity != this && entity.position == nextPos && entity.isActive && entity is Gimmic gimmic)
+            {
+                Debug.Log("vampire on active spike");
+                GimmicIteraction(gimmic);
+            }
+        }
+
     }
 }
 
