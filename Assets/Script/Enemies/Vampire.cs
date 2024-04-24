@@ -107,11 +107,7 @@ public class Vampire : Enemy
 
     private void GimmicIteraction(Gimmic gimmic)
     {
-        if(gimmic is SpikeEntity a)
-        {
-            Debug.Log(a.open);
-        }
-        
+          
         if (gimmic is SpikeEntity spikeEntity && spikeEntity.open)
         {
                 GameManager.Instance.AddAction(new DisableAction(this));
@@ -146,7 +142,6 @@ public class Vampire : Enemy
 
             if (entity != this && entity.position == nextPos && entity.isActive && entity is Gimmic gimmic)
             {
-                Debug.Log("vampire on active spike");
                 GimmicIteraction(gimmic);
             }
         }
