@@ -143,17 +143,20 @@ public class InvincibleAction : IReversibleAction
         this.player = player;
         this.invincibleCounterBefore = player.invincibleCounter;
         this.invincibleCounterAfter = invincibleCounter;
+
     }
 
     public void Perform()
     {
         player.invincibleCounter = invincibleCounterAfter;
         player.isBlocking = player.invincibleCounter > 0;
+        player.gameObject.GetComponent<SpriteRenderer>().color = player.invincibleCounter > 0 ? Color.red : Color.white;
     }
 
     public void Undo()
     {
         player.invincibleCounter = invincibleCounterBefore;
         player.isBlocking = player.invincibleCounter > 0;
+        player.gameObject.GetComponent<SpriteRenderer>().color = player.invincibleCounter > 0 ? Color.red : Color.white;
     }
 }
