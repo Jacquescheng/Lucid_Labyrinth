@@ -8,11 +8,6 @@ public class Skeleton : Enemy
 {
     public override string Label => "Skeleton";
 
-    new void Start()
-    {
-        base.Start();
-        facingDirection = new Vector2Int(1, 0);
-    }
     // Update is called once per frame
     void Update()
     {

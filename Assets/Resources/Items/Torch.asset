@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: Torch
   sprite: {fileID: 1110704417, guid: fd1151bedb85341449b2fb4d2721670a, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
-  addRadius: 2
+  addRadius: 3

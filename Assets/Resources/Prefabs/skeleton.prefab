@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
-  facingDirection: {x: 0, y: 0}
+  facingDirection: {x: 1, y: 0}
   isBlocking: 1
   isActive: 1
 --- !u!1 &1841111386376532637
