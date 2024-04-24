@@ -40,6 +40,11 @@ public class Vampire : Enemy
         int ysign = targetDirection.y > 0 ? 1 : (targetDirection.y < 0 ? -1 : 0);
         
         //change direction if player on leftside of player
+        if (targetDirection == Vector2Int.zero)
+        {
+            return;
+        }
+
         if (targetDirection.x<0)
         {
             GameManager.Instance.AddAction(new ChangeFacingAction(this, -facingDirection));
@@ -105,7 +110,7 @@ public class Vampire : Enemy
             if (!EntityManager.Instance.IsPositionBlocked(position + moveDirection))
             {
                 GameManager.Instance.AddAction(new MoveAction(this, moveDirection));
-                Debug.Log(moveDirection);
+                // Debug.Log(moveDirection);
             }
         }
             

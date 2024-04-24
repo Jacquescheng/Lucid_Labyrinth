@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73013f0294c04a829cf54d8d896fd26, type: 3}
-  m_Name: BlueKey
+  m_Script: {fileID: 11500000, guid: bc9adfa08c52f4de29fd65adc913dbb1, type: 3}
+  m_Name: Torch
   m_EditorClassIdentifier: 
-  itemName: Blue Key
-  sprite: {fileID: 1933863864, guid: fd1151bedb85341449b2fb4d2721670a, type: 3}
-  color: {r: 0, g: 0.8124628, b: 1, a: 1}
-  keyId: 0
+  itemName: Torch
+  sprite: {fileID: 1110704417, guid: fd1151bedb85341449b2fb4d2721670a, type: 3}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  addRadius: 2

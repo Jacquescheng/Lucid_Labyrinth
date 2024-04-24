@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
 
 public class PlayableChar : Entity
@@ -43,13 +44,8 @@ public class PlayableChar : Entity
     //     }
     // }
     public void ItemIteraction(ItemEntity itemEntity) {
-        if (itemEntity.item is Key)
-        {
-            GameManager.Instance.AddAction(new UpdateKeyCountAction(this, keys + 1));
-            Debug.Log("Picked up a key! Total keys: " + keys);
-            GameManager.Instance.AddAction(new DisableAction(itemEntity));
-        }
-
+        GameManager.Instance.AddAction(new DisableAction(itemEntity));
+        itemEntity.item.GetItem(this);
     }
 
     public void EnemyIteraction(Enemy enemy) {
@@ -113,28 +109,5 @@ public class PlayableChar : Entity
             }
         }  
 
-    }
-}
-
-public class UpdateKeyCountAction : IReversibleAction
-{
-    public PlayableChar player;
-    public int keysBefore;
-    public int keysAfter;
-    public UpdateKeyCountAction(PlayableChar player, int keys)
-    {
-        this.player = player;
-        this.keysBefore = player.keys;
-        this.keysAfter = keys;
-    }
-
-    public void Perform()
-    {
-        player.keys = keysAfter;
-    }
-
-    public void Undo()
-    {
-        player.keys = keysBefore;
     }
 }
