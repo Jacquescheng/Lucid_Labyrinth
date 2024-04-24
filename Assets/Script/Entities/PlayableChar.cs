@@ -66,6 +66,13 @@ public class PlayableChar : Entity
                 Debug.Log($"You are killed by {spikeEntity.Label}!");
             }
         }
+        else
+        if (gimmic is BedEntity bedEntity)
+        {
+            GameManager.Instance.AddAction(new DisableAction(this));
+            GameManager.won = true;
+            Debug.Log($"Congrat! You won!");
+        }
     }
 
     public void DoorInteraction(DoorEntity doorEntity) {

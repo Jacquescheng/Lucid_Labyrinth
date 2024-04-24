@@ -185,6 +185,11 @@ MonoBehaviour:
   facingDirection: {x: 0, y: 0}
   isBlocking: 1
   isActive: 1
+  petrolPoint: {x: 0, y: 0}
+  SpawnIsPetrolPoint: 1
+  chaseRange: 5
+  retreatRange: 10
+  actionMode: 0
 --- !u!95 &-7386959897691442550
 Animator:
   serializedVersion: 5

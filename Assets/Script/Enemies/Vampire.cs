@@ -10,8 +10,8 @@ public class Vampire : Enemy
     public override string Label => "Vampire";
     public Vector2Int petrolPoint;
     public bool SpawnIsPetrolPoint = true;
-    int chaseRange = 5;
-    int retreatRange = 10;
+    public int chaseRange = 5;
+    public int retreatRange = 10;
 
     // [NonSerialized]
     public int actionMode = 0;

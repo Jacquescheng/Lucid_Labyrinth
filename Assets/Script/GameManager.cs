@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public static bool isPaused = false;
     public static bool isDead = false;
+    public static bool won = false;
     public static string killedBy;
     public GameState state;
 
@@ -89,6 +90,8 @@ public class GameManager : MonoBehaviour
                 actionStack.Push(currentTurnActions);
                 if (isDead) {
                     gameObject.GetComponent<DeadScreen>().Create();
+                } else if (won) {
+                    gameObject.GetComponent<EndScreen>().Create();
                 }
                 ChangeGameState(GameState.PlayerTurn);
                 break;
