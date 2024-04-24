@@ -11,7 +11,7 @@ public class Vampire : Enemy
     public Vector2Int petrolPoint;
     public bool SpawnIsPetrolPoint = true;
     int chaseRange = 5;
-    int retreatRange = 7;
+    int retreatRange = 10;
 
     // [NonSerialized]
     public int actionMode = 0;
