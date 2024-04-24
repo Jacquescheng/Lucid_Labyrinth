@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public static string killedBy;
     public static int deathCount = 0;
     public static bool won = false;
+    private static bool showInstruction = true;
     public GameState state;
 
     public Tilemap LevelTilemap;
@@ -81,6 +82,12 @@ public class GameManager : MonoBehaviour
                 GameObject player = Resources.Load<GameObject>("Prefabs/PlayableChar");
                 Vector2Int playerPosition = new Vector2Int(-5, 0);
                 EntityManager.Instance.CreateEntity(player, playerPosition);
+
+                if (showInstruction) {
+                    gameObject.GetComponent<InstructionPage>().Create();
+                    showInstruction = false;
+                }
+
                 ChangeGameState(GameState.PlayerTurn);
                 break;
             case GameState.PlayerTurn:
