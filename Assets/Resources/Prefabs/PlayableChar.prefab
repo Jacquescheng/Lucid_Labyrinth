@@ -198,6 +198,7 @@ MonoBehaviour:
   isBlocking: 0
   isActive: 1
   keys: 0
+  invincibleCounter: 0
 --- !u!82 &2433999428119447444
 AudioSource:
   m_ObjectHideFlags: 0
