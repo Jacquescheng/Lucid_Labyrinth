@@ -71588,7 +71588,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8110948806820151978, guid: 6ddf892afcb3c2044821e915cedbbbdf, type: 3}
       propertyPath: chaseRange
-      value: 100
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8110948806820151978, guid: 6ddf892afcb3c2044821e915cedbbbdf, type: 3}
       propertyPath: position.x
@@ -71600,7 +71600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8110948806820151978, guid: 6ddf892afcb3c2044821e915cedbbbdf, type: 3}
       propertyPath: retreatRange
-      value: 100
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
