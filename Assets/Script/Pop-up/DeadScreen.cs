@@ -7,10 +7,12 @@ public class DeadScreen : MonoBehaviour
 {
     public GameObject deadScreen;
     public TMP_Text cause;
+    private  AudioSource[] audioSources;
     // Start is called before the first frame update
     void Start()
     {
         deadScreen.SetActive(false);
+        audioSources = GetComponents<AudioSource>();
     }
 
     // Update is called once per frame
@@ -28,6 +30,11 @@ public class DeadScreen : MonoBehaviour
 
     public void Undo()
     {
+        audioSources[0].Play();
+        Invoke("DelayedUndo", 0.2f);
+    }
+    private void DelayedUndo()
+    {
         GameManager.isDead = false;
         deadScreen.SetActive(false);
         GameManager.Instance.Undo();
@@ -36,6 +43,12 @@ public class DeadScreen : MonoBehaviour
 
     public void Restart()
     {
+        audioSources[0].Play();
+        Invoke("DelayedRestart", 0.2f);
+    }
+    private void DelayedRestart()
+    {
         SceneManager.LoadScene("GameScene");
     }
+
 }

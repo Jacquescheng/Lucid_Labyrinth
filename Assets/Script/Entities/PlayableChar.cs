@@ -10,8 +10,7 @@ public class PlayableChar : Entity
     // Start is called before the first frame update
     public int keys = 0;
     public int invincibleCounter = 0;
-
-
+    private AudioSource[] audioSources;
     public int Move(Vector2Int moveDirection)
     {
         // Move the character
@@ -61,7 +60,7 @@ public class PlayableChar : Entity
         Debug.Log($"You are killed by {enemy.Label}!");
     }
 
-    public void GimmicIteraction(Gimmic gimmic) {
+    public void GimmicIteraction(Gimmic gimmic,  AudioSource background,  AudioSource death) {
         if (gimmic is SpikeEntity spikeEntity)
         {
             if (spikeEntity.open && invincibleCounter == 0)
@@ -70,6 +69,8 @@ public class PlayableChar : Entity
                 GameManager.isDead = true;
                 GameManager.killedBy = spikeEntity.Label;
                 Debug.Log($"You are killed by {spikeEntity.Label}!");
+                background.Stop();
+                death.Play();
             }
         }
         else
@@ -81,22 +82,26 @@ public class PlayableChar : Entity
         }
     }
 
-    public void DoorInteraction(DoorEntity doorEntity) {
+    public void DoorInteraction(DoorEntity doorEntity, AudioSource doorOpened) {
         if (keys > 0) {
             GameManager.Instance.AddAction(new UpdateKeyCountAction(this, keys - 1));
             if (doorEntity.leftside)
             {
                 doorEntity.OpenDoor();
+                doorOpened.Play();
             }
             else
             {
                 doorEntity.pairedDoor.OpenDoor();
+                doorOpened.Play();
             }
         }
     }
 
     public override void Action()
     {
+        audioSources = GetComponents<AudioSource>();
+        audioSources[0].Play();
         foreach (var entity in EntityManager.Instance.entities)
         {
             if (entity != this && entity.position == position && entity.isActive)
@@ -104,20 +109,26 @@ public class PlayableChar : Entity
                 if (entity is ItemEntity entity1)
                 {
                     ItemIteraction(entity1);
+                    audioSources[3].Play();
                 }
                 else if (entity is Enemy enemy)
                 {
                     EnemyIteraction(enemy);
+                    audioSources[2].Stop();
+                    audioSources[1].Play();
                 } else if (entity is Gimmic gimmic) 
                 {
-                    GimmicIteraction(gimmic);
+                    GimmicIteraction(gimmic, audioSources[2], audioSources[1]);
                 }
             }
             if (entity != this && Vector2.Distance(entity.position, position) < 2 && entity.isActive)
             {
                 if (entity is DoorEntity doorEntity)
                 {
-                    DoorInteraction(doorEntity);
+                    if(keys <= 0){
+                        audioSources[4].Play();
+                    }
+                    DoorInteraction(doorEntity, audioSources[5]);
                 }
             }
         }  

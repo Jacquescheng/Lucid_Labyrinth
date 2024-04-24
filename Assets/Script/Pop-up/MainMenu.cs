@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public string newGameScene;
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -20,11 +21,23 @@ public class MainMenu : MonoBehaviour
 
     public void NewGame()
     {
+        audioSource.Play();
+        Invoke("DelayedLoadScene", 0.2f);
+    }
+    private void DelayedLoadScene()
+    {
         SceneManager.LoadScene(newGameScene);
     }
 
     public void QuitGame()
     {
+        audioSource.Play();
+        Invoke("DelayedQuit", 0.2f);
+    }
+
+    private void DelayedQuit()
+    {
         Application.Quit();
     }
+     
 }
