@@ -45,37 +45,36 @@ public class Vampire : Enemy
             return;
         }
 
-        if (targetDirection.x<0)
-        {
-            GameManager.Instance.AddAction(new ChangeFacingAction(this, -facingDirection));
-        }
+        Vector2Int tempFacingDirection = facingDirection;
+        tempFacingDirection.x = xsign;
+        GameManager.Instance.AddAction(new ChangeFacingAction(this, tempFacingDirection));
+        
         //select furthest x/y direction to move first
         if (Math.Abs(targetDirection.x) > Math.Abs(targetDirection.y))
         {
 
             //move x
-            if(targetPosition.x < position.x)
-            {
-                moveDirection.x = -1;
-            }
-            else
-            {
-                moveDirection.x = 1;
-            }
+            moveDirection.x = xsign;
             toX = true;
         }
-        else
+        else if (Math.Abs(targetDirection.x) < Math.Abs(targetDirection.y))
         {
             //move y
-            if (targetPosition.y < position.y)
+            moveDirection.y = ysign;
+            toX = false;    
+        } else {
+            if (UnityEngine.Random.Range(0, 2) == 0)
             {
-                moveDirection.y = -1;
+                //move x
+                moveDirection.x = xsign;
+                toX = true;
             }
             else
             {
-                moveDirection.y = 1;
+                //move y
+                moveDirection.y = ysign;
+                toX = false;
             }
-            toX = false;    
         }
         if (!EntityManager.Instance.IsPositionBlocked(position + moveDirection))
         {
@@ -87,25 +86,12 @@ public class Vampire : Enemy
             if(toX)
             {
                 //move y
-                if (targetPosition.y < position.y)
-                {
-                    moveDirection.y = -1;
-                }
-                else
-                {
-                    moveDirection.y = 1;
-                }
+                moveDirection.y = ysign;
             }
             else
             {
-                if (targetPosition.x < position.x)
-                {
-                    moveDirection.x = -1;
-                }
-                else
-                {
-                    moveDirection.x = 1;
-                }
+                //move x
+                moveDirection.x = xsign;
             }
             if (!EntityManager.Instance.IsPositionBlocked(position + moveDirection))
             {

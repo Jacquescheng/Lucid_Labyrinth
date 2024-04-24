@@ -87,6 +87,23 @@ public class GameManager : MonoBehaviour
                 EntityManager.Instance.EnvTurn();
                 break;
             case GameState.EndTurn:
+
+                List<PlayableChar> players = new List<PlayableChar>();
+                foreach (var entity in EntityManager.Instance.entities)
+                {
+                    if (entity.isActive)
+                        if (entity is PlayableChar @char)
+                        {
+                            players.Add(@char);
+                        }
+                }
+
+                foreach (var player_char in players)
+                {
+                    player_char.EndTurn();
+                }
+
+
                 actionStack.Push(currentTurnActions);
                 if (isDead) {
                     gameObject.GetComponent<DeadScreen>().Create();

@@ -9,6 +9,7 @@ public class PlayableChar : Entity
 {
     // Start is called before the first frame update
     public int keys = 0;
+    public int invincibleCounter = 0;
 
 
     public int Move(Vector2Int moveDirection)
@@ -49,6 +50,11 @@ public class PlayableChar : Entity
     }
 
     public void EnemyIteraction(Enemy enemy) {
+        if (invincibleCounter > 0)
+        {
+            return;
+        }
+
         GameManager.Instance.AddAction(new DisableAction(this));
         GameManager.isDead = true;
         GameManager.killedBy = enemy.Label;
@@ -58,7 +64,7 @@ public class PlayableChar : Entity
     public void GimmicIteraction(Gimmic gimmic) {
         if (gimmic is SpikeEntity spikeEntity)
         {
-            if (spikeEntity.open)
+            if (spikeEntity.open && invincibleCounter == 0)
             {
                 GameManager.Instance.AddAction(new DisableAction(this));
                 GameManager.isDead = true;
@@ -116,5 +122,38 @@ public class PlayableChar : Entity
             }
         }  
 
+    }
+
+    public void EndTurn()
+    {
+        if (invincibleCounter > 0)
+        {
+            GameManager.Instance.AddAction(new InvincibleAction(this, invincibleCounter - 1));
+        }
+    }
+}
+
+public class InvincibleAction : IReversibleAction
+{
+    public PlayableChar player;
+    public int invincibleCounterBefore;
+    public int invincibleCounterAfter;
+    public InvincibleAction(PlayableChar player, int invincibleCounter)
+    {
+        this.player = player;
+        this.invincibleCounterBefore = player.invincibleCounter;
+        this.invincibleCounterAfter = invincibleCounter;
+    }
+
+    public void Perform()
+    {
+        player.invincibleCounter = invincibleCounterAfter;
+        player.isBlocking = player.invincibleCounter > 0;
+    }
+
+    public void Undo()
+    {
+        player.invincibleCounter = invincibleCounterBefore;
+        player.isBlocking = player.invincibleCounter > 0;
     }
 }
