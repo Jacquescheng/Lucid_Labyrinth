@@ -34,23 +34,13 @@ public class PlayableChar : Entity
         return 1;
 
     }
-
-    // public void Eat() { // For testing only
-    //     foreach (var entity in EntityManager.Instance.entities)
-    //     {
-    //         if (entity != this && entity.position == position && entity.isActive)
-    //         {
-    //             Debug.Log("Eating " + entity.name);
-    //             GameManager.Instance.AddAction(new DisableAction(entity));
-    //         }
-    //     }
-    // }
-    public void ItemIteraction(ItemEntity itemEntity) {
+    
+    private void ItemIteraction(ItemEntity itemEntity) {
         GameManager.Instance.AddAction(new DisableAction(itemEntity));
         itemEntity.item.GetItem(this);
     }
 
-    public void EnemyIteraction(Enemy enemy) {
+    private void EnemyIteraction(Enemy enemy) {
         if (invincibleCounter > 0)
         {
             return;
@@ -78,13 +68,6 @@ public class PlayableChar : Entity
                 death.Play();
             }
         }
-        else
-        if (gimmic is BedEntity bedEntity)
-        {
-            GameManager.Instance.AddAction(new DisableAction(this));
-            GameManager.won = true;
-            Debug.Log($"Congrat! You won!");
-        }
     }
 
     public void DoorInteraction(DoorEntity doorEntity, AudioSource doorOpened) {
@@ -101,6 +84,12 @@ public class PlayableChar : Entity
                 doorOpened.Play();
             }
         }
+    }
+
+    private void BedInteraction() {
+        GameManager.Instance.AddAction(new DisableAction(this));
+        GameManager.won = true;
+        Debug.Log($"Congrat! You won!");
     }
 
     public override void Action()
@@ -138,6 +127,10 @@ public class PlayableChar : Entity
                         audioSources[4].Play();
                     }
                     DoorInteraction(doorEntity, audioSources[5]);
+                }
+                if (entity is BedEntity bedEntity)
+                {
+                    BedInteraction();
                 }
             }
         }  
