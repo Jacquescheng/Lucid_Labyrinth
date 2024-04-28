@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public static bool isDead = false;
     public static string killedBy;
     public static int deathCount = 0;
+    public static int undoCount = 0;
     public static bool won = false;
     private static bool showInstruction = true;
     public GameState state;
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
         InputManager.Instance.enabled = true;
         isDead = false;
         deathCount = 0;
+        undoCount = 0;
         isPaused = false;
         won = false;
         ChangeGameState(0);
@@ -48,36 +50,9 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.SpawnObject:
-                // GameObject test_ett = Resources.Load<GameObject>("Prefabs/RandomMovingEtt");
-                // Vector2Int test_ett_position = new Vector2Int(-1, 3);
-                // EntityManager.Instance.CreateEntity(test_ett, test_ett_position);
-
-                //GameObject skeleton = Resources.Load<GameObject>("Prefabs/skeleton");
-                //Vector2Int skeleton_pos= new Vector2Int(-5, -3);
-                //EntityManager.Instance.CreateEntity(skeleton, skeleton_pos);
-
-                //GameObject vampire = Resources.Load<GameObject>("Prefabs/vampire");
-                //Vector2Int vampire_pos = new Vector2Int(3, -2);
-                //EntityManager.Instance.CreateEntity(vampire, vampire_pos, new Vector2Int(1, 0));
-
-                // Item item = Resources.Load<Item>("Items/New Key");
-                // Vector2Int item_position = new Vector2Int(3, 3);
-                // EntityManager.Instance.CreateItemEntity(item, item_position);
-
-                // GameObject spike = Resources.Load<GameObject>("Prefabs/SpikeEntity");
-                // spike.GetComponent<SpikeEntity>().open = true;
-                // Vector2Int spike_position = new Vector2Int(0, 0);
-                // EntityManager.Instance.CreateEntity(spike, spike_position);
-
-                // GameObject spike_2 = Resources.Load<GameObject>("Prefabs/SpikeEntity");
-                // spike_2.GetComponent<SpikeEntity>().open = false;
-                // Vector2Int spike_position_2 = new Vector2Int(0, -1);
-                // EntityManager.Instance.CreateEntity(spike_2, spike_position_2);
-
                 ChangeGameState(GameState.SpawnPlayer);
-
-
                 break;
+
             case GameState.SpawnPlayer:
                 GameObject player = Resources.Load<GameObject>("Prefabs/PlayableChar");
                 Vector2Int playerPosition = new Vector2Int(-5, 0);
@@ -121,6 +96,7 @@ public class GameManager : MonoBehaviour
                     deathCount++;
                     gameObject.GetComponent<DeadScreen>().Create();
                 } else if (won) {
+                    gameObject.GetComponent<OverlayUI>().overlayUI.SetActive(false);
                     gameObject.GetComponent<EndScreen>().Create();
                 }
                 ChangeGameState(GameState.PlayerTurn);
@@ -151,6 +127,7 @@ public class GameManager : MonoBehaviour
             action.Undo();
         }
         EntityManager.Instance.UpdateEntites();
+        undoCount++;
     }
 }
 

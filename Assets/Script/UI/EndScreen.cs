@@ -8,6 +8,7 @@ public class EndScreen : MonoBehaviour
 {
     public GameObject endScreen;
     public TMP_Text deathCount;
+    public TMP_Text undoCount;
 
     private  AudioSource[] audioSources;
     private  AudioSource[] allAudioSources;
@@ -28,7 +29,8 @@ public class EndScreen : MonoBehaviour
     public void Create()
     {
         allAudioSources = GameObject.FindObjectsOfType<AudioSource>();
-        deathCount.text = $"<color=#93278F>Death count: {GameManager.deathCount}</color>";
+        deathCount.text = $"<color=#93278F>Death count: </color><color=red>{GameManager.deathCount}</color>";
+        undoCount.text = $"<color=#93278F>Undo steps: </color><color=red>{GameManager.undoCount}</color>";
         GameManager.isPaused = true;
         endScreen.SetActive(true);
         foreach (AudioSource audio in allAudioSources){
